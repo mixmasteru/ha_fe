@@ -7,7 +7,7 @@
     <title>Title</title>
 
     <script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1.1','packages':['line', 'corechart']}]}"></script>
-
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script type="text/javascript">
         google.load('visualization', '1.1', {packages: ['line', 'corechart']});
         google.setOnLoadCallback(drawChart);
@@ -35,6 +35,8 @@
                 [new Date(2014, 11), -.2,  4.5]
             ]);
 
+            //alert(data.toJSON());
+
             var materialOptions = {
                 chart: {
                     title: 'Average Temperatures and Daylight in Iceland Throughout the Year'
@@ -59,7 +61,17 @@
                 var materialChart = new google.charts.Line(chartDiv);
                 //alert(google.visualization.dataTableToCsv(data));
 
-                materialChart.draw(data, materialOptions);
+                var jsonData = $.ajax({
+                    url: "getLineData.php",
+                    dataType: "json",
+                    async: false
+                }).responseText;
+                //jsonData = eval(jsonData);
+                //alert(data);
+                // Create our data table out of JSON data loaded from server.
+                var data1 = new google.visualization.DataTable(jsonData);
+
+                materialChart.draw(data1, materialOptions);
             }
 
             drawMaterialChart();

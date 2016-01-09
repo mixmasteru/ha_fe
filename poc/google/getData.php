@@ -16,6 +16,7 @@ $string = "{
         {\"c\":[{\"v\":\"Pepperoni\",\"f\":null},{\"v\":2,\"f\":null}]}
       ]
 }";
+header('Content-Type: application/json');
 echo $string;
 
 // Instead you can query your database and parse into JSON etc etc
