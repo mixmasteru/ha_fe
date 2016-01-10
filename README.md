@@ -12,3 +12,4 @@ This is a frontend for ha_api to display the gathered data.
 - [cubism](http://square.github.io/cubism/)
 - [morris.js](http://morrisjs.github.io/morris.js/)
 - [highcharts](http://www.highcharts.com)
+- [D3](http://d3js.org/)
