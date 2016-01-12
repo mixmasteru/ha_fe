@@ -1,0 +1,27 @@
+
+.background {
+    fill: #ffffff;
+    fill-opacity: 0.01;
+}
+.component {
+    fill: #e1e1e1;
+}
+.component .label {
+    fill: #0000ff;
+    font-family: Myriad,"Helvetic Neue",Helvetica,Arial;
+    text-anchor: middle;
+}
+.arc {
+    fill: #4e8fff;
+}
+.arc2 {
+    fill: #3660b0;
+}
+.label {
+    font-family: Myriad,"Helvetic Neue",Helvetica,Arial;
+    text-anchor: middle;
+}
+.radial-svg {
+    display: block;
+    margin: 0 auto;
+}
