@@ -29,6 +29,7 @@ OTHER DEALINGS IN THE SOFTWARE.
     <meta HTTP-EQUIV="X-UA-COMPATIBLE" CONTENT="IE=EmulateIE9" >
     <script type="text/javascript" src="//d3js.org/d3.v3.min.js"></script>
     <script type="text/javascript" src="scripts/radialProgress.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
     <link type="text/css" rel="stylesheet" href="styles.css">
 
@@ -139,12 +140,19 @@ OTHER DEALINGS IN THE SOFTWARE.
     }
 
     function start() {
+        var jsonData = $.ajax({
+            url: "getData.php",
+            dataType: "json",
+            async: false
+        }).responseText;
+
+        var temp = parseInt(eval(jsonData));
 
         var rp1 = radialProgress(document.getElementById('div1'))
-                .label("RADIAL 1")
+                .label("Temp")
                 .onClick(onClick1)
                 .diameter(150)
-                .value(78)
+                .value(temp)
                 .render();
 
         var rp2 = radialProgress(document.getElementById('div2'))
