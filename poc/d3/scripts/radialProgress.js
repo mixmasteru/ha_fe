@@ -41,6 +41,8 @@ function radialProgress(parent) {
         _minValue = 0,
         _maxValue = 100;
 
+    var _unit = "%";
+
     var  _currentArc= 0, _currentArc2= 0, _currentValue=0;
 
     var _arc = d3.svg.arc()
@@ -49,7 +51,6 @@ function radialProgress(parent) {
     var _arc2 = d3.svg.arc()
         .startAngle(0 * (Math.PI/180))
         .endAngle(0); //just radians
-
 
     _selection=d3.select(parent);
 
@@ -118,7 +119,7 @@ function radialProgress(parent) {
                 .attr("cursor","pointer")
                 .attr("width",_width)
                 // .attr("x",(3*_fontSize/2))
-                .text(function (d) { return Math.round((_value-_minValue)/(_maxValue-_minValue)*100) + "%" })
+                .text(function (d) { return Math.round((_value-_minValue)/(_maxValue-_minValue)*100) + _unit })
                 .style("font-size",_fontSize+"px")
                 .on("click",onMouseClick);
 
@@ -164,7 +165,7 @@ function radialProgress(parent) {
 
         return function(t) {
             _currentValue = i(t);
-            this.textContent = Math.round(i(t)) + "%";
+            this.textContent = Math.round(i(t)) + _unit;
         }
     }
 
@@ -238,6 +239,12 @@ function radialProgress(parent) {
     component.label = function(_) {
         if (!arguments.length) return _label;
         _label = _;
+        return component;
+    };
+
+    component.unit = function(_) {
+        if (!arguments.length) return _unit;
+        _unit = _;
         return component;
     };
 
