@@ -1,11 +1,22 @@
 <?php
+$type = $_GET['type'];
 $limit = 1;
 $auth = "";
 $host  = "";
-$json_temps = file_get_contents("http://".$auth.$host."/t/temps/1/0/".$limit."/");
-//$json_humis = file_get_contents("http://".$auth.$host."/t/humis/1/0/".$limit."/");
+$key = "";
 
-$arr_temps = json_decode($json_temps,true);
+if($type === "temp") {
+    $json = file_get_contents("http://".$auth.$host."/t/temps/1/0/" . $limit . "/");
+    $key = "temp";
+}
+elseif($type === "humi") {
+    $json = file_get_contents("http://".$auth.$host."/t/humis/1/0/".$limit."/");
+    $key = "humidity";
+}
 
-header('Content-Type: application/json');
-echo json_encode($arr_temps[0]['temp']);
+
+if(!empty($json)) {
+    $arr_data = json_decode($json, true);
+    header('Content-Type: application/json');
+    echo json_encode($arr_data[0][$key]);
+}

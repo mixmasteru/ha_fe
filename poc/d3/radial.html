@@ -140,13 +140,20 @@ OTHER DEALINGS IN THE SOFTWARE.
     }
 
     function start() {
-        var jsonData = $.ajax({
-            url: "getData.php",
+        var jsonTemp = $.ajax({
+            url: "getData.php?type=temp",
             dataType: "json",
             async: false
         }).responseText;
 
-        var temp = parseInt(eval(jsonData));
+        var jsonHumi = $.ajax({
+            url: "getData.php?type=humi",
+            dataType: "json",
+            async: false
+        }).responseText;
+
+        var temp = parseInt(JSON.parse(jsonTemp));
+        var humi = parseInt(JSON.parse(jsonHumi));
 
         var rp1 = radialProgress(document.getElementById('div1'))
                 .label("Temp")
@@ -159,10 +166,10 @@ OTHER DEALINGS IN THE SOFTWARE.
                 .render();
 
         var rp2 = radialProgress(document.getElementById('div2'))
-                .label("RADIAL 2")
+                .label("Humidity")
                 .onClick(onClick2)
                 .diameter(150)
-                .value(132)
+                .value(humi)
                 .render();
 
         var rp3 = radialProgress(document.getElementById('div3'))
