@@ -29,10 +29,10 @@
 <script>
 
     var margin = {top: 20, right: 20, bottom: 30, left: 50},
-            width = 300 - margin.left - margin.right,
-            height = 150 - margin.top - margin.bottom;
+            width = 700 - margin.left - margin.right,
+            height = 250 - margin.top - margin.bottom;
 
-    var formatDate = d3.time.format("%d-%b-%y");
+    var formatDate = d3.time.format("%b-%d-%Y-%H-%M-%S");
 
     var x = d3.time.scale()
             .range([0, width]);
@@ -50,7 +50,7 @@
 
     var line = d3.svg.line()
             .x(function(d) { return x(d.date); })
-            .y(function(d) { return y(d.close); });
+            .y(function(d) { return y(d.temp); });
 
     var svg = d3.select("body").append("svg")
             .attr("width", width + margin.left + margin.right)
@@ -58,11 +58,11 @@
             .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    d3.tsv("data.tsv", type, function(error, data) {
+    d3.tsv("getLineData.php?type=temp", type, function(error, data) {
         if (error) throw error;
 
         x.domain(d3.extent(data, function(d) { return d.date; }));
-        y.domain(d3.extent(data, function(d) { return d.close; }));
+        y.domain(d3.extent(data, function(d) { return d.temp; }));
 
         svg.append("g")
                 .attr("class", "x axis")
@@ -77,7 +77,7 @@
                 .attr("y", 6)
                 .attr("dy", ".71em")
                 .style("text-anchor", "end")
-                .text("Price ($)");
+                .text("Temp (C°)");
 
         svg.append("path")
                 .datum(data)
@@ -87,7 +87,7 @@
 
     function type(d) {
         d.date = formatDate.parse(d.date);
-        d.close = +d.close;
+        d.temp = d.temp;
         return d;
     }
 

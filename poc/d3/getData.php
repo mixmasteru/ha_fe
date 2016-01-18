@@ -1,8 +1,8 @@
 <?php
+include 'auth.php';
+
 $type = $_GET['type'];
 $limit = 1;
-$auth = "";
-$host  = "";
 $key = "";
 
 if($type === "temp") {

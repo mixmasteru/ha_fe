@@ -1,8 +1,8 @@
 <?php
+include 'auth.php';
+
 $type = $_GET['type'];
-$limit = 100;
-$auth = "";
-$host  = "";
+$limit = 1000;
 $key = "";
 
 if($type === "temp") {
@@ -20,5 +20,5 @@ $str_out = "";
 header('Content-Type: application/text');
 echo "date\t".$key."\n";
 foreach ($arr_data as $arr_item) {
-    echo strtotime($arr_item['date'])."\t".$arr_item[$key]."\n";
+    echo date("M-d-Y-H-i-s",strtotime($arr_item['date']))."\t".$arr_item[$key]."\n";
 }
