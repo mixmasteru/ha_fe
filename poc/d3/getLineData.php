@@ -18,7 +18,7 @@ $arr_data = json_decode($json, true);
 $str_out = "";
 
 header('Content-Type: application/text');
-echo "date\t".$key."\n";
+echo "date\t".$key."\thumi"."\n";
 foreach ($arr_data as $arr_item) {
-    echo date("M-d-Y-H-i-s",strtotime($arr_item['date']))."\t".$arr_item[$key]."\n";
+    echo date("M-d-Y-H-i-s",strtotime($arr_item['date']))."\t".$arr_item[$key]."\t"."40"."\n";
 }
