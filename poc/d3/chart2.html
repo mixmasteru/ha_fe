@@ -31,7 +31,7 @@
 
 </style>
 <body>
-<script src="//d3js.org/d3.v3.min.js"></script>
+<script src="scripts/d3.v3.js"></script>
 <script>
 
     var margin = {top: 20, right: 50, bottom: 30, left: 50},
@@ -75,12 +75,14 @@
             .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    d3.tsv("getLineData.php?type=temp", type, function(error, data) {
+    d3.tsv("getMultiLineData.php", type, function(error, data) {
         if (error) throw error;
 
-        x.domain(d3.extent(data, function(d) { return d.date; }));
-        y0.domain(d3.extent(data, function(d) { return d.temp; }));
-        y1.domain(d3.extent(data, function(d) { return d.humi; }));
+         x.domain(d3.extent(data, function(d) { return d.date; }));
+        //y0.domain(d3.extent(data, function(d) { return d.temp; }));
+        y0.domain([15, d3.max(data, function(d){ return Math.max(d.temp)+1; })]);
+        //y1.domain(d3.extent(data, function(d) { return d.humi; }));
+        y1.domain([0, d3.max(data, function(d){ return 100; })]);
 
         svg.append("g")
                 .attr("class", "x axis")
@@ -102,8 +104,7 @@
                 .attr("transform", "translate(" + width + " ,0)")
                 .call(yAxisR)
                 .append("text")
-                .attr("transform", "rotate(-90)")
-                .attr("transform", "translate(" + width + " ,0)")
+                //.attr("transform", "translate(" + margin + " ,0)")//.attr("transform", "rotate(-90)")
                 .attr("y", 6)
                 .attr("dy", ".71em")
                 .style("text-anchor", "end")
@@ -123,7 +124,7 @@
     function type(d) {
         d.date = formatDate.parse(d.date);
         d.temp = d.temp;
-        //d.humi = d.humi;
+        d.humi = d.humi;
         return d;
     }
 
