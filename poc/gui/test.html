@@ -17,7 +17,7 @@
       background: #000;
       margin: 0 auto;
       width: 200px;
-      padding: 100px;
+      padding: 10px;
       text-align: center;
       /* border-radius */
       -webkit-border-radius: 5px;
@@ -28,12 +28,33 @@
       -webkit-box-shadow: rgba(0,0,0,0.2) 0px 1px 3px;
       -moz-box-shadow: rgba(0,0,0,0.2) 0px 1px 3px;
       box-shadow: rgba(0,0,0,0.2) 0px 1px 3px;
+      -webkit-flex: none;
+      flex: none;
+      width: 300px;
+      height: 200px;
+
+    }
+
+    .none {
+      -webkit-flex: none;
+      flex: none;
+      width: 75px;
+      height: 75px;
+      border: 1px solid #FFF;
+    }
+
+    .flex-column {
+      -webkit-flex: 1;
+      flex: 1;
+      border: 1px solid #FFF;
     }
   </style>
 </head>
 <body>
 <div class="box">
-  <div>Titel</div>
+  <div class="flex-column">Titel</div>
+  <div class="none">content 1</div>
+  <div class="none">content</div>
   <div>content</div>
 </div>
 </body>
