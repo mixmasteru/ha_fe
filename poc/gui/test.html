@@ -40,22 +40,35 @@
       flex: none;
       width: 75px;
       height: 75px;
+      border: 1px solid gray;
+      float: left;
+    }
+
+    .headline {
+      -webkit-flex: 1;
+      flex: 1;
       border: 1px solid #FFF;
+      height: 10%;
     }
 
     .flex-column {
       -webkit-flex: 1;
       flex: 1;
       border: 1px solid #FFF;
+      height: 40%;
     }
   </style>
 </head>
 <body>
 <div class="box">
-  <div class="flex-column">Titel</div>
-  <div class="none">content 1</div>
-  <div class="none">content</div>
-  <div>content</div>
+  <div class="headline">Titel</div>
+  <div class="flex-column">
+    <div class="none">content 1</div>
+    <div class="none">content 2</div>
+  </div>
+  <div class="flex-column">
+    content
+  </div>
 </div>
 </body>
 </html>
